@@ -1,0 +1,44 @@
+using System;
+using System.Collections.Generic;
+
+class BingoGame
+{
+    static Random random = new Random(); // Skapar en instans av Random för att slumpa tal
+    static List<int> userNumbers = new List<int>(10); // Lista för användarens 10 tal
+
+    public static void Main()
+    {
+        Console.WriteLine("Välkommen till Bingospelet!");
+
+        // Användaren matar in 10 tal
+        for (int i = 0; i < 10; i++)
+        {
+            Console.Write($"Ange tal {i + 1}: ");
+            int userInput;
+
+            // Kontrollera att användaren skriver ett giltigt heltal
+            while (!int.TryParse(Console.ReadLine(), out userInput))
+            {
+                Console.WriteLine("Var god skriv ett giltigt heltal.");
+                Console.Write($"Ange tal {i + 1}: ");
+            }
+
+            // Lägg till användarens tal i listan
+            userNumbers.Add(userInput);
+        }
+
+        // Slumpa ett tal mellan 1 och 75
+        int randomNumber = random.Next(1, 76);
+        Console.WriteLine($"\nDet slumpade talet var: {randomNumber}");
+
+        // Kontrollera om det slumpade talet finns i användarens lista
+        if (userNumbers.Contains(randomNumber))
+        {
+            Console.WriteLine("Bingo!");
+        }
+        else
+        {
+            Console.WriteLine("Tyvärr, inget Bingo.");
+        }
+    }
+}
